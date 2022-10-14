@@ -82,22 +82,12 @@ public class Transacao {
     public boolean salvar(int tipoPagamento,int tipoTransacao) {
         System.out.println("tipo de transação = "+tipoTransacao);
         this.setTipo(tipoTransacao);
-        if(tipoPagamento == 1){
             if(tipoTransacao == 1)
-                new PagamentoPorBoleto().pagarCompra(this);
+                new PagamentoPorBoleto().pagarCompra(this, tipoPagamento);
             else
-                new PagamentoPorBoleto().pagarAlugar(this);
-        }else if(tipoPagamento == 2){
-            if(tipoTransacao == 1)
-                new PagamentoPorCartao().pagarCompra(this);
-            else
-                new PagamentoPorCartao().pagarAlugar(this);
-        }else{
-            if(tipoTransacao == 1)
-                new PagamentoPorPix().pagarCompra(this);
-            else
-                new PagamentoPorPix().pagarAlugar(this);
-        }//tá certo até aqui
+                new PagamentoPorBoleto().pagarAlugar(this, tipoPagamento);
+
+
         DAOTransacao dao = new DAOTransacao();
         if (dao.salvar(this)) {
             return true;

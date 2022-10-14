@@ -235,11 +235,13 @@ public class Rotas {
     //Alugar
     @PostMapping("/alugar/{tipoPagamento}")
     public ResponseEntity<Object> alugar(@RequestBody Transacao t,@PathVariable(value="tipoPagamento")int tipoPagamento){
+        System.out.println("PARAMETRO -> " + tipoPagamento);
         return new ResponseEntity<>(new MidiaDigitalAlugar().adquirirProduto(t, tipoPagamento), HttpStatus.OK);
     }
 
     @GetMapping("/alugar/buscar")
-    public ResponseEntity<Object> buscaralugar(@RequestBody Usuario u){
-        return new ResponseEntity<>(new MidiaDigitalAlugar().consultarFilmes(u), HttpStatus.OK);
+    public ResponseEntity<Object> buscaralugar(@RequestParam(value = "id") String id){
+        Usuario usuario = new Usuario().buscarUm(Integer.parseInt(id));
+        return new ResponseEntity<>(new MidiaDigitalAlugar().consultarFilmes(usuario), HttpStatus.OK);
     }
 }

@@ -12,7 +12,7 @@ public class PagamentoPorPix implements PagamentoStrategy {
     }
 
     @Override
-    public boolean pagarCompra(Transacao compra) {
+    public boolean pagarCompra(Transacao compra, int formaPagamento) {
         DAOPagamento dao = new DAOPagamento();
         Produto p = compra.getProduto();
         double por = p.getValor()*0.07;
@@ -20,7 +20,7 @@ public class PagamentoPorPix implements PagamentoStrategy {
     }
 
     @Override
-    public boolean pagarAlugar(Transacao alugar) {
+    public boolean pagarAlugar(Transacao alugar, int formaPagamento) {
         DAOPagamento dao = new DAOPagamento();
         Produto p = alugar.getProduto();
         double por = p.getValor()*0.11;
